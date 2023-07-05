@@ -20,4 +20,6 @@ For example, ChatGPT had an interesting take on its abilities for the Preface:
 
 Generative AI can definitely make music. And maybe soon, it'll be able to discern good coffee from bad. However, it can't yet be as creative as humans, especially in an intentional way. So we bring you a new kind of digital artifact to explore the promise and limits of generative AI. Welcome to the era of generated collective knowledge 🚀 
 
-LLMs (Large Language Models) offer an exciting breakthrough in knowledge generation. All of us are still exploring the most effective ways to harness them. We invite you to join us in this experiment! If you have comments and feedback or spot a hallucination or few, please engage with us here. Feel free to open an issue or even make a PR. Let's explore this evolving landscape of AI-generated content 🙌
+LLMs (Large Language Models) offer an exciting breakthrough in knowledge generation. All of us are grappling with the most effective ways to harness them. Let's explore this evolving landscape of AI-generated content!
+
+If you have comments and feedback or spot a hallucination or few, please engage with us on Linkedin. We'd love to hear from you 🙌
