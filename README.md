@@ -9,7 +9,7 @@ We used prompts to generate this book, lots of them. This preface is the only se
 We, Yashas and Gauthier, are Developer Advocates by day and are both seekers of 
 knowledge at all times. We began writing this book to explore the intricacies of generating a book. So we chose a subject dear to us: operationalizing models or MLops in short. Our experiences in applying automation for teams around the world have inspired this book. We've worked with public and private organizations and companies that are among the largest in the world and at the startup stage.
 
- We hope this reading an AI-generated book will be as enlightening to our audience as it was to us while *writing* it. Whether you're a in career navigating the waves of digital transformation, an educator looking to understand the applications of AI or a policymaker grappling with the societal implications of these technologies, we hope it'll give you a glimpse into the future.
+We hope this reading an AI-generated book will be as enlightening to our audience as it was to us while *writing* it. Whether you're a in career navigating the waves of digital transformation, an educator looking to understand the applications of AI or a policymaker grappling with the societal implications of these technologies, we hope it'll give you a glimpse into the future.
 
 ## Meet our co-author 🦾
 
