@@ -12,7 +12,7 @@ We, Yashas and Gauthier, are Dataikers by day and are both seekers of knowledge 
 
 Our experiences helping teams apply Machine Learning and automation globally inspired this book. We've worked with public organizations and private-sector companies, from those among the largest in the world to others at the startup stage. If you're looking for a book willing to dive into the technical aspects of MLOps in plain English, this is one for you.
 
-Also, we hope you will find reading an AI-generated book as enlightening as it was *writing* it. Whether you're in a career navigating the waves of digital transformation, an educator looking to understand the applications of AI or a policymaker grappling with its societal implications, we hope it'll give you a glimpse into the future.
+Also, we hope reading an AI-generated book is as enlightening as _writing_ it. Whether you're in a career navigating the waves of digital transformation, an educator looking to understand the applications of AI or a policymaker grappling with its societal implications, reading this book will give you a glimpse into the future.
 
 ## Who is our co-author 🤖🦾
 
