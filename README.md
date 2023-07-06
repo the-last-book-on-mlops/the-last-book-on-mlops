@@ -12,7 +12,7 @@ We, Yashas and Gauthier, are Dataikers by day and are both seekers of knowledge 
 
 Our experiences helping teams apply Machine Learning and automation globally inspired this book. We've worked with public organizations and private-sector companies, from those among the largest in the world to others at the startup stage. If you're looking for a book willing to dive into the technical aspects of MLOps in plain English, this is one for you.
 
-Also, we hope reading an AI-generated book is as enlightening as _writing_ it. It might give you a glimpse into the future of AI and its place in our world. Whether you're in a career navigating the waves of digital transformation, an educator looking to understand its applications or a policymaker grappling with its societal implications.
+Also, we hope reading generative AI content is as enlightening as _writing_ it. The book might give you a glimpse into the future of AI and its place in our world. Whether you're in a career navigating the waves of digital transformation, an educator looking to understand its applications or a policymaker grappling with its societal implications.
 
 ## Who is our co-author 🤖🦾
 
@@ -23,7 +23,7 @@ For example, ChatGPT had an interesting take on its abilities for the Preface:
 
 ## Get in touch 
 
-Generative AI can *definitely* make music. And maybe soon, it can discern good coffee from bad. However, it can't yet be as creative as humans, especially in an intentional way. Let's explore this evolving landscape and the promise/limits of AI-generated content via this new **digital artifact**! 
+AI can *definitely* make music. And maybe soon, it can discern good coffee from bad. However, it can't yet be as creative as humans, especially in an intentional way. Let's explore this evolving landscape and the promise/limits of AI-generated content via this new **digital artifact**! 
 
 If you have comments and feedback or spot a hallucination or few, please engage with us on Linkedin. We'd love to hear from you 🙌
 
