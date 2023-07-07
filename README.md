@@ -23,11 +23,15 @@ ChatGPT was a worthy third author, yet directing it wasn't straightforward. To e
 For example, ChatGPT had an interesting take on its abilities for the Preface:   
 > With an appetite for data and a knack for number crunching, AI helps bring a unique perspective to this book. While AI might not be able to play the guitar or enjoy a good cup of coffee, it compensates by devouring gigabytes of data for breakfast and generating insights at lightning speed!
 
-## Get in touch 
+## *I will never have time to read another MLOps book*
 
-AI can *definitely* make music. And maybe soon, it can discern good coffee from bad--for breakfast! However, it can't yet be as creative as humans and in an intentional way. So let's explore this evolving landscape and the promise/limits of AI-generated content via this new **digital artifact**!
+AI can *definitely* make music. And maybe soon, it can discern good coffee from bad--for breakfast! However, it can't yet be as creative as humans and in an intentional way. So let's explore this evolving landscape and the promise/limits of AI-generated content via this new **digital artifact**! 
 
-If you have comments and feedback or spot a hallucination or few, please engage with us on Linkedin. We'd love to hear from you 🙌
+But you might worry! How long will it take to read a book written by an infinitely large mind, trained on all the world's data!? We have worked hard on making it short and to the point. Imagine it as time well spent during three office commutes or the perfect excuse to sip a nice flat white in your favorite cafe! You will become knowledgeable on MLOps in no time 😎
+
+## Get in touch 🙌
+
+If you have comments and feedback or spot a hallucination or few, please engage with us on Linkedin. We'd love to hear from you!
 
 [Gauthier](https://www.linkedin.com/in/gauthier-schall-0ab74288/)    
 [Yashas](https://www.linkedin.com/in/yashas-vaidya/)
