@@ -2,7 +2,7 @@
 print("Say hello to our trio of authors: two curious humans and an Artificial Intelligence, all equally passionate about the fascinating world of MLOps!")
 ```
 
-Hold on 🖐️ That was ChatGPT getting ahead of itself!
+Hold on 🖐️ that was ChatGPT getting ahead of itself!
 
 ## Who are we 🥚🐣
 
