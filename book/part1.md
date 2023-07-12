@@ -10,7 +10,8 @@ header-includes: |
 ## Preface and Authors
 
 ```python
-print("Say hello to our trio of authors: two curious humans and an Artificial Intelligence, all equally passionate about the fascinating world of MLOps!")
+print("Say hello to our trio of authors: two curious humans and an Artificial Intelligence, \
+all equally passionate about the fascinating world of MLOps!")
 ```
 
 Hold on .. that was ChatGPT getting ahead of itself!
