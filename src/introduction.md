@@ -1,5 +1,6 @@
 ```python
-print("Say hello to our trio of authors: two curious humans and an Artificial Intelligence, all equally passionate about the fascinating world of MLOps!")
+print("Say hello to our trio of authors: two curious humans and an Artificial Intelligence, \
+all equally passionate about the fascinating world of MLOps!")
 ```
 
 Hold on 🖐️ that was ChatGPT getting ahead of itself!
@@ -8,7 +9,7 @@ Hold on 🖐️ that was ChatGPT getting ahead of itself!
 
 This preface is the only section written entirely us. Otherwise, we mostly played the part of prompt engineers and reviewers to our co-author 🚀
 
-Yashas and Gauthier are Dataikers by day and perpetual seekers of knowledge at all times. We began writing this book as Developer Advocates in early-2023. ChatGPT's release meant AI, a buzzword from our industry, invaded everyday conversation and public consciousness. We started to explore its intricacies and absurdities by generating a book on a familiar topic: operationalizing models, or **MLOps** *for short*.
+[Gauthier](https://www.linkedin.com/in/gauthier-schall-0ab74288/) and [Yashas](https://www.linkedin.com/in/yashas-vaidya/) are Dataikers by day and perpetual seekers of knowledge at all times. We began writing this book as Developer Advocates in early-2023. ChatGPT's release meant AI, a buzzword from our industry, invaded everyday conversation and public consciousness. We started to explore its intricacies and absurdities by generating a book on a familiar topic: operationalizing models, or **MLOps** *for short*.
 
 ## What's in the book for the reader 🎁📖
 
@@ -31,7 +32,4 @@ But you might worry! How long will it take to read a book written by a digital m
 
 ## Get in touch
 
-If you have comments and feedback or spot a hallucination or few, please engage with us on Linkedin. We'd love to hear from you 🙌
-
-[Gauthier](https://www.linkedin.com/in/gauthier-schall-0ab74288/)    
-[Yashas](https://www.linkedin.com/in/yashas-vaidya/)
+If you have comments and feedback or spot a hallucination or few, we'd love to hear from you 🙌
