@@ -158,7 +158,7 @@ In the machine learning world, we use evaluation metrics to measure our models' 
 
 ##### Commonly used evaluation metrics
 
-![Sweet watermelon competition - Midjourney](imgs/part1_watermeloncompetition.png)
+![Sweet watermelon competition - Midjourney](/imgs/part1_watermeloncompetition.png)
 *Sweet watermelon competition - Midjourney*
 
 Imagine you've just built a machine learning model to predict whether a watermelon will be sweet before you cut it open. In this case, accuracy, which measures the proportion of total predictions that were correct, could be a helpful metric. But what happens if you have a dataset where 90% of the watermelons are sweet? A model that blindly labels every watermelon as sweet will have a high accuracy of 90%, but it won't be useful in picking out those few non-sweet watermelons.
