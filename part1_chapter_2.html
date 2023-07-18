@@ -1,0 +1,431 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Chapter 2: Building or Reusing Machine Learning Models - The Last Book on MLOps</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="part1_chapter_1.html"><strong aria-hidden="true">2.</strong> Chapter 1: Data Preparation for Machine Learning</a></li><li class="chapter-item expanded "><a href="part1_chapter_2.html" class="active"><strong aria-hidden="true">3.</strong> Chapter 2: Building or Reusing Machine Learning Models</a></li><li class="chapter-item expanded "><a href="part2_chapter_3.html"><strong aria-hidden="true">4.</strong> Chapter 3: Deployment - Unleashing the Power of Your Machine Learning Models</a></li><li class="chapter-item expanded "><a href="part2_chapter_4.html"><strong aria-hidden="true">5.</strong> Chapter 4 Monitoring for MLOps</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Last Book on MLOps</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="chapter-2-building-or-reusing-machine-learning-models"><a class="header" href="#chapter-2-building-or-reusing-machine-learning-models">Chapter 2: Building or Reusing Machine Learning Models</a></h1>
+<h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
+<ul>
+<li><a href="#21-model-development">2.1 Model Development</a>
+<ul>
+<li><a href="#211-choosing-among-types-of-models-and-model-training">2.1.1 Choosing Among Types of Models and Model Training</a>
+<ul>
+<li><a href="#overview-of-model-architectures">Overview of model architectures</a></li>
+<li><a href="#different-types-of-machine-learning-approaches">Different types of machine learning approaches</a></li>
+<li><a href="#role-of-model-parameters">Role of model parameters</a></li>
+</ul>
+</li>
+<li><a href="#212-model-tuning-fine-tuning-parameters-and-hyperparameter-tuning">2.1.2 Model Tuning: Fine-tuning Parameters and Hyperparameter Tuning</a>
+<ul>
+<li><a href="#the-process-of-fine-tuning-model-parameters">The process of fine-tuning model parameters</a></li>
+<li><a href="#differentiating-between-model-parameters-and-hyperparameters">Differentiating between model parameters and hyperparameters</a></li>
+</ul>
+</li>
+<li><a href="#213-model-validation-techniques-for-ensuring-generalization">2.1.3 Model Validation: Techniques for Ensuring Generalization</a>
+<ul>
+<li><a href="#importance-of-model-validation">Importance of model validation</a></li>
+<li><a href="#introduction-of-validation-techniques">Introduction of validation techniques</a></li>
+<li><a href="#different-metrics-for-evaluating-model-performance">Different metrics for evaluating model performance</a></li>
+</ul>
+</li>
+<li><a href="#214-model-reuse-and-using-pre-trained-models">2.1.4 Model Reuse and Using Pre-trained Models</a>
+<ul>
+<li><a href="#concept-of-model-reuse">Concept of model reuse</a></li>
+<li><a href="#trade-offs-between-building-models-from-scratch-and-using-pre-built-models">Trade-offs between building models from scratch and using pre-built models</a></li>
+<li><a href="#use-of-pre-trained-models-in-transfer-learning">Use of pre-trained models in transfer learning</a></li>
+<li><a href="#techniques-for-adapting-and-fine-tuning-pre-trained-models">Techniques for adapting and fine-tuning pre-trained models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#22-model-evaluation">2.2 Model Evaluation</a>
+<ul>
+<li><a href="#221-model-evaluation-metrics-for-assessing-performance">2.2.1 Model Evaluation: Metrics for Assessing Performance</a>
+<ul>
+<li><a href="#importance-of-assessing-machine-learning-models-performance">Importance of assessing machine learning models' performance</a></li>
+<li><a href="#commonly-used-evaluation-metrics">Commonly used evaluation metrics</a></li>
+<li><a href="#significance-of-the-choice-of-metric">Significance of the choice of metric</a></li>
+</ul>
+</li>
+<li><a href="#222-model-comparison-and-selection">2.2.2 Model Comparison and Selection</a>
+<ul>
+<li><a href="#importance-of-comparing-different-models-performance">Importance of comparing different models' performance</a></li>
+<li><a href="#trade-offs-between-model-complexity-and-performance">Trade-offs between model complexity and performance</a></li>
+<li><a href="#techniques-for-model-selection">Techniques for model selection</a></li>
+<li><a href="#evaluating-model-performance-across-different-evaluation-metrics">Evaluating model performance across different evaluation metrics</a></li>
+</ul>
+</li>
+<li><a href="#223-transfer-learning-leveraging-existing-models">2.2.3 Transfer Learning: Leveraging Existing Models</a>
+<ul>
+<li><a href="#overview-of-transfer-learning">Overview of transfer learning</a></li>
+<li><a href="#use-of-pre-trained-models">Use of pre-trained models</a></li>
+<li><a href="#successful-applications-of-transfer-learning">Successful applications of transfer learning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#23-model-versioning-and-lineage">2.3 Model Versioning and Lineage</a>
+<ul>
+<li><a href="#231-version-control-systems-for-ml-models">2.3.1 Version Control Systems for ML Models</a>
+<ul>
+<li><a href="#concept-of-version-control-systems-for-machine-learning-models">Concept of version control systems for machine learning models</a></li>
+<li><a href="#benefits-of-using-version-control-systems-for-ml-models">Benefits of using version control systems for ML models</a></li>
+<li><a href="#overview-of-widely-used-version-control-systems">Overview of widely-used version control systems</a></li>
+</ul>
+</li>
+<li><a href="#232-model-lineage-and-metadata-management">2.3.2 Model Lineage and Metadata Management</a>
+<ul>
+<li><a href="#significance-of-model-lineage">Significance of model lineage</a></li>
+<li><a href="#techniques-and-tools-for-managing-and-tracking-model-lineage">Techniques and tools for managing and tracking model lineage</a></li>
+<li><a href="#concept-of-metadata-management-for-ml-models">Concept of metadata management for ML models</a></li>
+</ul>
+</li>
+<li><a href="#233-two-takes-on-reproducibility-and-traceability">2.3.3 Two Takes on Reproducibility and Traceability</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="chapter-2-building-or-reusing-machine-learning-models-1"><a class="header" href="#chapter-2-building-or-reusing-machine-learning-models-1">Chapter 2: Building or Reusing Machine Learning Models</a></h2>
+<h3 id="21-model-development"><a class="header" href="#21-model-development">2.1 Model Development</a></h3>
+<h4 id="211-choosing-among-types-of-models-and-model-training"><a class="header" href="#211-choosing-among-types-of-models-and-model-training">2.1.1 Choosing Among Types of Models and Model Training</a></h4>
+<h5 id="overview-of-model-architectures"><a class="header" href="#overview-of-model-architectures">Overview of model architectures</a></h5>
+<p><img src="imgs/part1_machinelearns.png" alt="A machine can learn - Midjourney" />
+<em>A machine can learn - Midjourney</em></p>
+<p>At the heart of every machine learning application is a model—a construct designed to learn patterns in data and make predictions or decisions. The model's architecture, training process, and final performance are closely tied to the nature of the problem we're trying to solve. This section will delve into different types of machine learning approaches, model architectures, parameters, and training techniques.</p>
+<p>Before we discuss model architectures, we must understand the problem we're trying to solve. Machine learning problems are typically classified into supervised learning, unsupervised learning, and semi-supervised learning.</p>
+<h5 id="different-types-of-machine-learning-approaches"><a class="header" href="#different-types-of-machine-learning-approaches">Different types of machine learning approaches</a></h5>
+<p>Supervised learning is a common machine learning task where each example in our training dataset is associated with a specific output value or label. Predicting house prices based on a set of features (like the number of bedrooms or the neighborhood) is a typical supervised learning problem. The model is trained to predict a continuous value (the price), making it a regression task.</p>
+<p>Unsupervised learning, in contrast, works with datasets that don't have a specific output label. These models are used to discover hidden patterns and relationships in the data. Clustering customers based on purchasing behavior, for instance, is an unsupervised learning task. The model has to identify groups or clusters of customers with similar buying patterns.</p>
+<p>Semi-supervised learning falls between the two. It involves training models on a dataset where some examples have labels, but others don't. This approach is often useful when collecting and labeling data is costly or time-consuming.</p>
+<p>After identifying the type of learning task, we move onto choosing a model architecture. This process is akin to selecting the right tool for the job. Different architectures have unique characteristics and are best suited to certain kinds of problems.</p>
+<p>Linear models, like linear regression and logistic regression, are fundamental tools in the data scientist's toolkit. They're easy to understand and interpret and often work well for relatively simple tasks or as a baseline for more complex models.</p>
+<p>Tree-based models, such as decision trees, random forests, and gradient boosting machines, partition the data into distinct groups or classes based on certain conditions. They are powerful non-linear models and are popular for both classification and regression tasks.</p>
+<p>Neural networks, the foundation of deep learning, consist of interconnected layers of neurons or nodes. They are particularly good at learning from high-dimensional data and have seen tremendous success in areas like image recognition, natural language processing, and more.</p>
+<p>Ensemble models combine predictions from multiple models to generate a final prediction. The goal is to leverage the strengths of each individual model to improve overall performance and reduce the likelihood of a poor prediction.</p>
+<h5 id="role-of-model-parameters"><a class="header" href="#role-of-model-parameters">Role of model parameters</a></h5>
+<p>Once we've chosen a model architecture, we need to understand the role of model parameters. Parameters are the parts of the model that are learned from the data during the training process. For instance, in a linear regression model, the parameters are the slope and intercept of the line. They're determined by the data and the learning algorithm.</p>
+<p>Understanding how models are trained is fundamental to successful machine learning. The training process involves iteratively adjusting the model's parameters to minimize the difference between the model's predictions and the actual values. This is often achieved using optimization algorithms like gradient descent, which aim to find the parameters that result in the smallest prediction error.</p>
+<p>In supervised learning, the model learns from labeled examples. In contrast, unsupervised learning involves training models to find patterns in unlabeled data, such as grouping similar examples together. Semi-supervised learning is a hybrid approach, using a mix of both labeled and unlabeled data to train models. This is particularly useful when labels are costly or difficult to obtain.</p>
+<p>Model training is a crucial step in machine learning, but it's also a complex one. We need to choose the right architecture, understand the role of model parameters, and apply the appropriate training techniques. But when we've matched the right model with the right problem, and trained it effectively, we can build machine learning systems that deliver impressive results.</p>
+<h4 id="212-model-tuning-fine-tuning-parameters-and-hyperparameter-tuning"><a class="header" href="#212-model-tuning-fine-tuning-parameters-and-hyperparameter-tuning">2.1.2 Model Tuning: Fine-tuning Parameters and Hyperparameter Tuning</a></h4>
+<h5 id="the-process-of-fine-tuning-model-parameters"><a class="header" href="#the-process-of-fine-tuning-model-parameters">The process of fine-tuning model parameters</a></h5>
+<p><img src="imgs/part1_bakingamodel.png" alt="Baking &amp; machine learning are more similar than you think - Midjourney" />
+<em>Baking &amp; machine learning are more similar than you think - Midjourney</em></p>
+<p>Machine learning model tuning is akin to the careful adjustments made while baking. It involves two key areas: fine-tuning model parameters and hyperparameter tuning.</p>
+<p>Model parameters are intrinsic properties of the model, comparable to the texture and moisture level of a cake that are developed during the baking process. These parameters are learned from the training data. The &quot;fine-tuning&quot; of these parameters is an automatic process conducted by the learning algorithm as it learns from the data, minimizing the model's prediction error—like getting the perfect cake texture by letting the cake bake and checking periodically.</p>
+<h5 id="differentiating-between-model-parameters-and-hyperparameters"><a class="header" href="#differentiating-between-model-parameters-and-hyperparameters">Differentiating between model parameters and hyperparameters</a></h5>
+<p>Hyperparameters, on the other hand, are preset conditions that are decided before the baking (or training) begins. They are like the oven temperature or baking time that the baker sets based on prior knowledge. Hyperparameter tuning involves finding the best combination of these preset conditions to produce the most delicious cake or, in our case, improve the model's performance.</p>
+<p>This tuning process is akin to a search problem. We have a set of oven temperatures and baking times, and we need to find the combination that results in the best cake. Similarly, with a set of hyperparameters, we seek the combination that results in the best model performance. Techniques for hyperparameter tuning include grid search, random search, and Bayesian optimization, each with their pros and cons, and the choice among them depends on factors like the complexity of the cake (model), available baking time (computational resources), and specific requirements of the cake recipe (problem at hand).</p>
+<h4 id="213-model-validation-techniques-for-ensuring-generalization"><a class="header" href="#213-model-validation-techniques-for-ensuring-generalization">2.1.3 Model Validation: Techniques for Ensuring Generalization</a></h4>
+<h5 id="importance-of-model-validation"><a class="header" href="#importance-of-model-validation">Importance of model validation</a></h5>
+<p>Validation in machine learning is like the final quality check for a dish—it ensures that the model, like the dish, is ready to serve. Just as a perfect recipe doesn't cause the cake to be too dry (underfitting) or too moist (overfitting), effective model validation ensures a balance between underfitting and overfitting. Overfitting refers to a model that has learned the training data too well, including its noise and outliers, making it perform poorly on new data. Underfitting is when the model is too simple to capture the underlying patterns in the data, leading to poor performance on both the training and validation data.</p>
+<h5 id="introduction-of-validation-techniques"><a class="header" href="#introduction-of-validation-techniques">Introduction of validation techniques</a></h5>
+<p>Techniques like hold-out validation and cross-validation are used to ensure this balance. Hold-out validation is similar to setting aside a portion of a dish to taste and evaluate. However, the effectiveness of this technique can vary depending on how the data is divided.</p>
+<p>On the other hand, cross-validation, especially k-fold cross-validation, is more like tasting a dish at various stages of cooking. The model is trained and tested several times, each time on a different subset of the data. Though more reliable than hold-out validation, this method is also more computationally intensive, much like the time and attention required to taste and adjust a dish at different stages.</p>
+<h5 id="different-metrics-for-evaluating-model-performance"><a class="header" href="#different-metrics-for-evaluating-model-performance">Different metrics for evaluating model performance</a></h5>
+<p>Lastly, to measure the model's performance, various metrics are used, like a chef uses different criteria to judge a dish. The chosen metrics depend on the problem type, such as accuracy, precision, recall, and F1 score for classification problems, or Mean Squared Error (MSE), Root Mean Squared Error (RMSE), or Mean Absolute Error (MAE) for regression problems. Ultimately, model validation aims to ensure our model can effectively solve the problem it was designed for—like ensuring a dish pleases the taste buds of those it is served to.</p>
+<h4 id="214-model-reuse-and-using-pre-trained-models"><a class="header" href="#214-model-reuse-and-using-pre-trained-models">2.1.4 Model Reuse and Using Pre-trained Models</a></h4>
+<h5 id="concept-of-model-reuse"><a class="header" href="#concept-of-model-reuse">Concept of model reuse</a></h5>
+<p>The process of creating a machine learning model from scratch, much like baking a cake from base ingredients, is an involved, often time-consuming endeavor. Fortunately, much like we can save time by using a pre-made cake mix, we can expedite the development process in machine learning by using pre-trained models or applying model reuse. This strategy is about leveraging the effort already expended in training models on large datasets to fast-track our development process and potentially enhance model performance.</p>
+<p>Model reuse involves leveraging previously developed models for new tasks. This can take the form of using pre-trained models or applying a method known as transfer learning. Pre-trained models are machine learning models that have been trained on extensive datasets and are often made available by large tech companies or research institutions. They can be very useful in speeding up development, as they save us from starting the model building process from scratch.</p>
+<h5 id="trade-offs-between-building-models-from-scratch-and-using-pre-built-models"><a class="header" href="#trade-offs-between-building-models-from-scratch-and-using-pre-built-models">Trade-offs between building models from scratch and using pre-built models</a></h5>
+<p>Just like using a pre-made cake mix for baking, there are several considerations when using pre-trained models. These include ensuring compatibility with the task at hand, assessing the complexity of the pre-built model, and evaluating its performance on similar tasks. While reusing models can speed up development, it doesn't afford the same level of customization as building models from scratch.</p>
+<h5 id="use-of-pre-trained-models-in-transfer-learning"><a class="header" href="#use-of-pre-trained-models-in-transfer-learning">Use of pre-trained models in transfer learning</a></h5>
+<p>Transfer learning, an advanced form of model reuse, uses a pre-trained model on a new problem. It's particularly effective when the data for your problem is similar to the data the model was initially trained on. Using pre-trained models through transfer learning provides several advantages: faster development, improved performance, and lesser computational resources. However, it also has limitations, such as the requirement of similar data distribution and the risk of negative transfer where the pre-trained model could potentially worsen performance if the tasks are too dissimilar.</p>
+<h5 id="techniques-for-adapting-and-fine-tuning-pre-trained-models"><a class="header" href="#techniques-for-adapting-and-fine-tuning-pre-trained-models">Techniques for adapting and fine-tuning pre-trained models</a></h5>
+<p>In the world of machine learning, several popular pre-trained models are widely used in different domains. In the field of computer vision, models like VGG and ResNet have revolutionized image classification and object detection. These models were trained on massive image datasets like ImageNet and have shown exceptional performance in their tasks. </p>
+<p>In the domain of natural language processing, the advent of models like BERT and GPT has brought significant advancements. BERT, introduced by Google, was pre-trained on a large corpus of text and has demonstrated remarkable effectiveness in understanding the context of language. Following BERT, OpenAI introduced the GPT series. These models, with their exponentially increasing scale, made headlines for their capabilities in language generation tasks.</p>
+<p>However, it's important to keep in mind that the landscape of pre-trained models is continually evolving, and newer models keep emerging with enhanced capabilities. Remember, the key is to choose the pre-trained model that best suits the task at hand and aligns with your data distribution.</p>
+<p>To wrap up, model reuse and using pre-trained models is akin to using a pre-made cake mix. It's a strategy that can significantly speed up the development process and improve model performance. But just as you need to pick the right cake mix for your baking endeavor, you also need to carefully select the right pre-trained model for your machine learning task.</p>
+<h3 id="22-model-evaluation"><a class="header" href="#22-model-evaluation">2.2 Model Evaluation</a></h3>
+<h4 id="221-model-evaluation-metrics-for-assessing-performance"><a class="header" href="#221-model-evaluation-metrics-for-assessing-performance">2.2.1 Model Evaluation: Metrics for Assessing Performance</a></h4>
+<h5 id="importance-of-assessing-machine-learning-models-performance"><a class="header" href="#importance-of-assessing-machine-learning-models-performance">Importance of assessing machine learning models' performance</a></h5>
+<p>When creating machine learning models, we're essentially setting out to solve a problem. But creating the model is just the beginning. After that, we need to figure out how well the model is doing its job. Much like tasting a dish while cooking, model evaluation allows us to check on the progress of our model, making sure it's on track to becoming something useful and effective.</p>
+<p>In the machine learning world, we use evaluation metrics to measure our models' performance. There's a wealth of different metrics out there, each with their specific purposes and interpretations. The right one to use can heavily depend on your specific task and the real-world context. Let's look at some commonly used ones.</p>
+<h5 id="commonly-used-evaluation-metrics"><a class="header" href="#commonly-used-evaluation-metrics">Commonly used evaluation metrics</a></h5>
+<p><img src="./imgs/part1_watermeloncompetition.png" alt="Sweet watermelon competition - Midjourney" />
+<em>Sweet watermelon competition - Midjourney</em></p>
+<p>Imagine you've just built a machine learning model to predict whether a watermelon will be sweet before you cut it open. In this case, accuracy, which measures the proportion of total predictions that were correct, could be a helpful metric. But what happens if you have a dataset where 90% of the watermelons are sweet? A model that blindly labels every watermelon as sweet will have a high accuracy of 90%, but it won't be useful in picking out those few non-sweet watermelons.</p>
+<p>That's where precision and recall come in. Precision and recall are particularly useful when one class is much more prevalent, or when we care more about one class over the other. In the context of our watermelon prediction task, precision would be the proportion of watermelons that our model correctly identified as sweet out of all the watermelons it predicted as sweet. It's answering the question: &quot;When the model said the watermelon was sweet, how often was it correct?&quot;</p>
+<p>On the other hand, recall in our watermelon scenario would be the proportion of watermelons that the model correctly identified as sweet out of all the actual sweet watermelons. It answers: &quot;How many of the actual sweet watermelons did the model manage to catch?&quot;</p>
+<p>The F1 score comes in handy when you want a balance between precision and recall. The F1 score is essentially a weighted average of precision and recall. Think of it as hosting a big watermelon tasting event where both serving a bitter watermelon and wrongly labeling a sweet one could harm your reputation. You'd aim for a model with a high F1 score.</p>
+<p>In binary classification tasks, we often have to decide on a threshold for classifying observations based on the probabilities predicted by the model. The Area Under the Receiver Operating Characteristic Curve, or AUC-ROC, measures the model's ability to correctly classify observations as positive or negative across all possible thresholds, providing a comprehensive evaluation of the model's performance. Thus, the AUC gives us a single measure of how our model performs across all possible classification thresholds, ranking its ability to distinguish between sweet and non-sweet watermelons.</p>
+<h5 id="significance-of-the-choice-of-metric"><a class="header" href="#significance-of-the-choice-of-metric">Significance of the choice of metric</a></h5>
+<p>But it's not just about understanding these metrics; it's about aligning them with the real-world context of the problem you're trying to solve. If you're only interested in accuracy and use that to build a model that predicts all watermelons as sweet, you're going to be in for a lot of bitter surprises. On the other hand, a model with a high recall might ensure that you catch all the sweet watermelons, but at the cost of potentially mislabeling and serving a lot of non-sweet ones.</p>
+<p>Choosing the right metric, or set of metrics, for your problem ensures that the model’s performance aligns with the real-world impact you want it to have. They help guide you as you steer your models towards producing meaningful outcomes in the real world. And they serve as a reminder that what lies at the heart of machine learning isn't just algorithms and data, but the real-life effects these models have on our decisions and day-to-day lives.</p>
+<h4 id="222-model-comparison-and-selection"><a class="header" href="#222-model-comparison-and-selection">2.2.2 Model Comparison and Selection</a></h4>
+<h5 id="importance-of-comparing-different-models-performance"><a class="header" href="#importance-of-comparing-different-models-performance">Importance of comparing different models' performance</a></h5>
+<p>Training a machine learning model is a crucial phase in the process, but it's not the final destination. An equally critical step is model comparison and selection, where different models are evaluated to determine which one best suits the task at hand.</p>
+<p>This model selection process is akin to choosing the right tool for a particular job. After training various models, each might exhibit unique strengths and weaknesses. These can be evaluated using metrics such as accuracy, precision, recall, F1 score, or AUC. However, relying solely on these metrics could result in a choice that is more luck than judgment. Statistical techniques like the paired t-test or ANOVA can be employed to determine whether performance differences between models, such as a decision tree and a neural network, are genuinely significant or just a result of random variation in the test data.</p>
+<h5 id="trade-offs-between-model-complexity-and-performance"><a class="header" href="#trade-offs-between-model-complexity-and-performance">Trade-offs between model complexity and performance</a></h5>
+<p>Cross-validation emerges as a powerful tool in both hyperparameter tuning and model selection. This technique aids in ensuring that our models do not merely fit the training data well, but can also generalize effectively to new, unseen data. Crucially, when different models are trained, each with its own strengths and weaknesses, cross-validation helps provide a more reliable estimate of how each model might perform on unseen data. This estimation is more reliable than a single training/test split, reducing the risk of the estimate being influenced by a specific partitioning of the data. Consequently, cross-validation is especially valuable when deliberating the trade-offs between model complexity and performance.</p>
+<p>Simple models may be quick and easy to interpret but risk oversimplifying the problem and missing significant patterns. On the flip side, complex models, like deep neural networks, might fit the training data exceedingly well but potentially overgeneralize, fitting the noise instead of the underlying patterns and leading to overfitting. Balancing this bias-variance trade-off is a crucial consideration during model comparison.</p>
+<h5 id="techniques-for-model-selection"><a class="header" href="#techniques-for-model-selection">Techniques for model selection</a></h5>
+<p>Efficient model selection techniques can help strike a balance between performance and complexity. Grid search, an exhaustive approach to exploring a manually specified subset of the hyperparameter space, is a traditional method but can be computationally expensive with larger datasets or complex models. An alternative is random search, which samples hyperparameters at random for a fixed number of iterations, providing a more efficient approach for high-dimensional hyperparameter spaces. Bayesian optimization, on the other hand, uses the objective function to select the most promising hyperparameters to evaluate, ensuring a thoughtful balance in the search space.</p>
+<h5 id="evaluating-model-performance-across-different-evaluation-metrics"><a class="header" href="#evaluating-model-performance-across-different-evaluation-metrics">Evaluating model performance across different evaluation metrics</a></h5>
+<p>Model comparison and selection are not just about picking the model with the highest accuracy or the lowest error. The process requires careful consideration of the problem's nature, the relevance of different metrics, available computational resources, and the fine balance between performance and model complexity. The selected model should align well with the problem's nature, objectives, and constraints, and it should perform well not just on the training data but on unseen data as well. Much like a mechanic wouldn't choose a tool simply because it's the newest or most expensive, the best model isn't always the most complex or the one that performs best on the training set.</p>
+<h4 id="223-transfer-learning-leveraging-existing-models"><a class="header" href="#223-transfer-learning-leveraging-existing-models">2.2.3 Transfer Learning: Leveraging Existing Models</a></h4>
+<p><img src="imgs/part1_modelstransferlearning.png" alt="Models can transfer their learning - Midjourney" />
+<em>Models can transfer their learning - Midjourney</em></p>
+<h5 id="overview-of-transfer-learning"><a class="header" href="#overview-of-transfer-learning">Overview of transfer learning</a></h5>
+<p>Choosing the best model for a task isn't always about selecting between freshly trained algorithms. Sometimes, the key to optimal performance is to use, or &quot;transfer,&quot; the knowledge already acquired by an existing model to a new related task. This method, known as transfer learning, can significantly boost a model's performance and provide substantial efficiency gains, especially when dealing with high-dimensional data like images or text.</p>
+<p>So, how does transfer learning work? In essence, it capitalizes on the idea that general features learned for one task could be useful for another. To draw a parallel, if you are an expert in French, you could leverage that knowledge to learn Spanish more quickly. Similar principles apply in machine learning. For example, a model trained to identify dogs in images may already know a lot about recognizing general features such as edges, shapes, or textures. When given a new but related task, like identifying cats, the model doesn't need to learn these features from scratch. It can &quot;transfer&quot; this knowledge, thus reducing the training time and potentially improving performance.</p>
+<h5 id="use-of-pre-trained-models"><a class="header" href="#use-of-pre-trained-models">Use of pre-trained models</a></h5>
+<p>Transfer learning is particularly beneficial when the new task has limited training data. Training a complex model like a deep neural network from scratch requires a lot of data. Without sufficient data, the model may overfit, learning the training data too well and failing to generalize to new examples. By using a pre-trained model as a starting point, transfer learning can mitigate this risk.</p>
+<p>The benefits of transfer learning come into full bloom when the new task is similar to the task the original model was trained on. For instance, if the pre-trained model was trained on a large dataset of general images (like ImageNet), it may perform well on a variety of image recognition tasks. Likewise, a model trained on a broad text corpus might excel in various natural language processing tasks.</p>
+<h5 id="successful-applications-of-transfer-learning"><a class="header" href="#successful-applications-of-transfer-learning">Successful applications of transfer learning</a></h5>
+<p>In practice, there are several ways to apply transfer learning. One common approach is to use a pre-trained model as a feature extractor. Here, the initial layers of the model, which have learned general features, are kept fixed while the final layers are retrained on the new task. Another approach is to fine-tune the entire model on the new task, adjusting the pre-trained weights slightly to optimize performance.</p>
+<p>Both computer vision and natural language processing have seen successful applications of transfer learning. For instance, pre-trained models like VGG16, Inception, or ResNet, trained on millions of images, have been used effectively as base models for various image recognition tasks, from diagnosing diseases in medical imaging to identifying objects in autonomous vehicles. Similarly, in natural language processing, models like BERT, GPT, or ELMo, pre-trained on large text corpora, have shown substantial performance improvements in tasks like sentiment analysis, text classification, and named entity recognition.</p>
+<p>However, transfer learning is not a silver bullet. The success of this method largely depends on the similarity between the original task and the new task. If the tasks are too dissimilar, transfer learning may not bring much benefit, and sometimes it may even impair performance. Therefore, it's important to evaluate the potential for transfer learning on a case-by-case basis, considering factors such as the similarity of the tasks, the amount of available data for the new task, and the complexity of the models involved.</p>
+<p>Transfer learning thus presents a valuable tool in the data scientist's toolbox, allowing us to stand on the shoulders of giants by leveraging existing models. It highlights a central theme in machine learning: learning is not an isolated event but a cumulative process, where knowledge gained in one context can be transferred and adapted to another. However, like every tool, it needs to be used judiciously, taking into account the specific context and requirements of the task at hand.</p>
+<h3 id="23-model-versioning-and-lineage"><a class="header" href="#23-model-versioning-and-lineage">2.3 Model Versioning and Lineage</a></h3>
+<h4 id="231-version-control-systems-for-ml-models"><a class="header" href="#231-version-control-systems-for-ml-models">2.3.1 Version Control Systems for ML Models</a></h4>
+<h5 id="concept-of-version-control-systems-for-machine-learning-models"><a class="header" href="#concept-of-version-control-systems-for-machine-learning-models">Concept of version control systems for machine learning models</a></h5>
+<p>The intricacy of model selection, comparison, and transfer learning, as discussed in the previous section, provides insight into the complexity of developing machine learning models. This dynamic process involves a series of iterations, adjustments, and, not least, collaboration. The evolving nature of model development necessitates a robust system for tracking model versions, accompanying data, and progressive modifications. This is where version control systems explicitly designed for machine learning come into the picture, offering the vital infrastructure for managing changes, promoting teamwork, and proficiently overseeing models.</p>
+<h5 id="benefits-of-using-version-control-systems-for-ml-models"><a class="header" href="#benefits-of-using-version-control-systems-for-ml-models">Benefits of using version control systems for ML models</a></h5>
+<p>Machine learning tailored version control systems offer three primary advantages:</p>
+<ol>
+<li>
+<p><strong>Reproducibility Improvement</strong>: In machine learning, reproducibility is paramount. Since a model's performance is tightly bound to a specific configuration of data, code, and model parameters, the ability to reproduce a model's training and evaluation setup is vital for comprehending its behavior and troubleshooting issues. Version control systems meticulously track all these components, enabling anyone to replicate a previous state of the model and its corresponding results.</p>
+</li>
+<li>
+<p><strong>Enhanced Collaboration</strong>: In most professional environments, the process of building machine learning models is a group endeavor. Various stakeholders such as data scientists, engineers, and others need to share code, data, models, and insights, frequently working on identical models concurrently. A version control system facilitates effective collaboration, enabling team members to work on distinct aspects of a project simultaneously without the risk of inadvertently overriding each other's work.</p>
+</li>
+<li>
+<p><strong>Rollback Capabilities</strong>: In any complex project, there's always the possibility that things may not go as planned. An alteration to the model or data might introduce a bug, or an update may lead to a decline in model performance. In such situations, the capability to revert to a previous, functional version of the model can be of immense value.</p>
+</li>
+</ol>
+<h5 id="overview-of-widely-used-version-control-systems"><a class="header" href="#overview-of-widely-used-version-control-systems">Overview of widely-used version control systems</a></h5>
+<p>Several version control systems, particularly tailored for machine learning, have seen widespread adoption in recent years. One such tool is Git, a general-purpose version control system originally designed for managing software development projects. Git's primary strength lies in efficiently tracking code changes, supporting collaboration, and providing a comprehensive history of project alterations.</p>
+<p>However, machine learning projects often extend beyond just code, encompassing large datasets, model weights, hyperparameters, and experimental results. Traditional version control systems like Git are not explicitly designed to handle these efficiently. To address this gap, tools like DVC (Data Version Control) and MLflow have surfaced, which augment Git's capabilities to cater to the unique needs of machine learning projects. For instance, DVC can monitor alterations to large datasets and model weights, while MLflow enables logging and comparing experiment results.</p>
+<p>Each of these version control systems has its unique capabilities and strengths, and the choice of tool would hinge on the specific needs of your project and team. Regardless of the tool selected, the incorporation of a version control system can drastically enhance the efficiency, reproducibility, and collaboration within machine learning projects, leading to superior model development and deployment.</p>
+<h4 id="232-model-lineage-and-metadata-management"><a class="header" href="#232-model-lineage-and-metadata-management">2.3.2 Model Lineage and Metadata Management</a></h4>
+<h5 id="significance-of-model-lineage"><a class="header" href="#significance-of-model-lineage">Significance of model lineage</a></h5>
+<p>Understanding the model's progression over time, from the initial concept to final deployment, is an essential aspect of machine learning model management. This trajectory, termed as &quot;model lineage,&quot; contributes to the robustness of the model development workflow in a number of ways.</p>
+<p>Model lineage fosters reproducibility, much like version control systems, as covered in the previous section. By meticulously documenting every step of the model's life, including data sources, preprocessing steps, model parameters, hyperparameters, training procedures, and evaluation metrics, model lineage ensures that every stage of the model's development can be accurately replicated. This capability is indispensable when troubleshooting performance issues or investigating unexpected model behavior.</p>
+<p>In addition, model lineage enhances traceability. The intricacy of machine learning models and the sheer volume of data processed imply that many things can change over time. An adjustment to a preprocessing step or an update to the training data can significantly impact the model's performance. Model lineage provides a &quot;paper trail&quot; that details every alteration made to the model, making it easier to trace the root cause of any changes in model performance.</p>
+<p>Finally, model lineage facilitates model governance. In regulated industries or contexts where models have significant real-world impacts, it's crucial to maintain comprehensive documentation of model development. Model lineage records can serve as an audit trail, demonstrating that best practices were followed during model development, thereby supporting regulatory compliance and accountability.</p>
+<h5 id="techniques-and-tools-for-managing-and-tracking-model-lineage"><a class="header" href="#techniques-and-tools-for-managing-and-tracking-model-lineage">Techniques and tools for managing and tracking model lineage</a></h5>
+<p>Maintaining model lineage throughout the machine learning lifecycle requires rigorous discipline and the right set of tools. It involves recording every data transformation, every model training run, and every evaluation step, while also ensuring that this information remains linked to the appropriate version of the model. This process can be challenging due to the iterative nature of model development and the potential for human error. Tools such as MLflow can help automate this process, ensuring a reliable and accurate model lineage.</p>
+<h5 id="concept-of-metadata-management-for-ml-models"><a class="header" href="#concept-of-metadata-management-for-ml-models">Concept of metadata management for ML models</a></h5>
+<p>Complementary to model lineage is the management of metadata associated with ML models. Metadata, the data about the data and the models, encapsulates a wealth of information, such as dataset descriptions, feature statistics, model parameters, performance metrics, and more. Well-managed metadata facilitates reproducibility, enhances traceability, and assists in model governance in similar ways as model lineage. It allows quick access to crucial details about the data and the model, enabling better understanding and smoother collaboration among team members.</p>
+<p>In conclusion, establishing rigorous practices for model lineage and metadata management is a crucial investment in the robustness and reliability of your machine learning workflow. These practices contribute to a well-documented, traceable, and accountable model development process, which in turn leads to more reliable and trustworthy machine learning models.</p>
+<h4 id="233-two-takes-on-reproducibility-and-traceability"><a class="header" href="#233-two-takes-on-reproducibility-and-traceability">2.3.3 Two Takes on Reproducibility and Traceability</a></h4>
+<p>&quot;Version control for ML models&quot; and &quot;model lineage&quot; are two interconnected concepts in the lifecycle of machine learning projects, both crucial for reproducibility and traceability.</p>
+<p>Version control for ML models is about keeping track of different versions of machine learning artifacts including code, datasets, model weights, hyperparameters, and experimental results. The goal here is to efficiently manage the changes and iterations that occur during the development of machine learning models. For instance, if an older version of a model performed better, version control allows you to go back to that version and understand what was different. Tools like DVC and MLflow augment traditional version control systems like Git to handle these machine learning-specific needs.</p>
+<p>Model lineage, on the other hand, is about tracking the entire history of a model's development process, recording every data transformation, every model training run, and every evaluation step. It ensures that this information remains linked to the appropriate version of the model. It's like a detailed map that traces the journey of how a model came to be, from the raw data to the final model. This allows for better understanding, debugging, auditing, and reproduction of results. Tools like MLflow help automate the process of maintaining model lineage, making it more reliable and accurate.</p>
+<p>So, while both involve tracking changes and history, version control focuses more on the different versions of the models and their associated artifacts, while model lineage is about the history of the entire process that led to each model version. Both concepts work together to ensure reproducibility and accountability in machine learning projects.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="part1_chapter_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="part2_chapter_3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="part1_chapter_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="part2_chapter_3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
